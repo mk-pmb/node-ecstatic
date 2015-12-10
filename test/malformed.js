@@ -9,11 +9,12 @@ test('malformed uri', function (t) {
   t.on('end', function () {
     server.close();
   });
-  
+
   server.listen(0, function () {
     var r = http.get({
       host: 'localhost',
       port: server.address().port,
+      headers: { Connection: 'close' },
       path: '/%'
     });
     r.on('response', function (res) {
